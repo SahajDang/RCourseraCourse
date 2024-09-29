@@ -87,3 +87,106 @@ sample() # creates a random sampling of integers from 1 to X without replacement
 which()  #returns the indices of the vector that are TRUE
 any(x < _)
 all()
+
+## lapply and sapply 
+head()
+viewinfo() # To open a more complete description of the dataset in a separate text file
+cls_list <- lapply(flags, class) # to apply the class() function to each column of
+                                 # the flags dataset and store the result in a variable called cls_list
+as.character()
+cls_vect <- sapply(flags, class) # stores the results of lapply in a vector
+ # Note the comma before 11:17. 
+flag_colors <- flags[, 11:17] # This subsetting command tells R that we want all rows,
+                              # but only columns 11 through 17.
+range()  # returns the minimum and maximum of its first argument
+unique() # returns a vector with all duplicate elements removed
+lapply(unique_vals, function(elem) elem[2]) # anonymous function embedded in the lapply function that returns the second element of each column in unique_vals
+sapply(split(mtcars$mpg, mtcars$cyl), mean) # calculate the average miles per gallon (mpg) by number of cylinders in the car (cyl)
+
+## vapply and tapply
+vapply()                                # Whereas sapply() tries to 'guess' the correct format of the result,
+vapply(flags, unique, numeric(1))       # vapply() allows you to specify it explicitly.
+
+tapply()        # As a data analyst, you'll often wish to split your data up 
+                # into groups based on the value of some variable, then
+                # apply a function to the members of each group
+table()
+
+tapply(flags$animate, flags$landmass, mean) # the proportion of flags containing an animate image WITHIN each landmass group
+
+##  Looking at Data
+dim()
+nrow()
+ncol()
+object.size()
+names()
+head(x, 10)
+tail(x, 10)
+summary()
+table(x$x)
+str() # structure of data set including variables, factors, levels, and observations
+
+## Simulation
+sample()
+sample(1:6, 4, replace = TRUE) # simulate rolling four six-sided dice
+sample(LETTERS) # permutation of the elements in the vector LETTERS
+sample(c(0,1), 100, replace = TRUE, prob = c(0.3, 0.7)) # assign probabilities to the values of the vector being sampled
+rbinom() #simulate a random binomial variable
+rbinom(n = 1, size = 100, prob = 0.7) # you only specify the probability of 'success' (heads/1)
+rnorm(n = x, mean = x, stdev = x)
+rpois() #poisson distribution
+replicate()
+replicate(100, rpois(5, 10))
+colMeans()
+hist()
+rexp() # exponential distribution
+rchisq() # chi-squared distribution
+rgamma() # gamma distributtion
+set.seed() # IMPORTNAT for proper random number generation!
+qpois() # calculates the inverse of the poisson distribution, `q` works for all the sampling functions
+
+# Dates and Times
+Sys.Date() #get today's date "year - month - day"
+unclass() # to see what the variables looks like internally, for dates it's the number of days since 1970-01-01
+as.Date("1969-01-01") # reference a prior date
+Sys.time() #current date and time 
+as.POSIXlt(Sys.time())
+x$min # access the minutes
+weekdays()
+months()
+quarters()
+strptime() # converts character vectors to POSIXlt
+strptime(x, "%B %d, %Y %H:%M")
+difftime() # allows you to specify a 'units' parameter
+difftime(Sys.time(), t1, units = 'days')
+
+## Base Graphics
+# ggplot2 tutorial http://varianceexplained.org/r/teach_ggplot2_to_beginners/
+plot()
+plot(x = cars$speed, y = cars$dist, xlab = "Speed", ylab = "Stopping Distance")
+plot(cars, main = "My Plot", sub ="My Plot Subtitle")
+plot(cars, col = 2)
+plot(cars, xlim = c(10, 15))
+plot(cars, pch = 2)
+boxplot(mpg ~ cyl, mtcars) #using a "formula" as an argument
+hist()
+hist(mtcars$mpg)
+
+## non-Swirl exercises but good functions to know
+# Debug
+debug()
+debugonce()  # will exit the browser after one `Q`
+traceback()
+options(error = recover) # set a global option to brows through errors
+suppressWarnings() #supresses warnings on script within `()`
+
+
+#Using the Profiler to monitor the function call stack
+Rprof() #tracks the time spent on each function 
+system.time()
+
+#Other
+invisible()
+solve() # computes the inverse of a matrix
+which() # returns the index of the vector that equals the specified value.
+which(LETTERS == "R")
